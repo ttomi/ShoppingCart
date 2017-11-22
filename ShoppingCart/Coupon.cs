@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +7,7 @@ namespace ShoppingCart
     {
         // todo maybe make this an interface and implement Discount and FreeItem coupons
         public readonly Prerequisite[] PrerequisiteProducts;
+
         // not an array, because for multiple affected products I'll just create a new entry with same prerequisite
         public readonly CheckoutItem ResultingPrices;
 
@@ -32,7 +32,7 @@ namespace ShoppingCart
         public static Coupon FourthMilkFree = new Coupon(
             new Prerequisite[] { new Prerequisite(3, CartItem.Milk) },
             new CheckoutItem(CartItem.Milk, 1));
-        
+
         public static Dictionary<int, Coupon> ActiveDiscounts = new Dictionary<int, Coupon>
         {
             { 1, ButterHalfPrice },

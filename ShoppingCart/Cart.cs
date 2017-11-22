@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShoppingCart
 {
@@ -16,7 +13,7 @@ namespace ShoppingCart
         public Cart()
         {
             Products = new List<CartItem>();
-            Coupons  = new List<Coupon>();
+            Coupons = new List<Coupon>();
         }
 
         public double TotalPrice => _totalPrice;
@@ -48,7 +45,7 @@ namespace ShoppingCart
             CheckoutItems = new List<CheckoutItem>();
             GetCoupons();
             ApplyCoupons(tempProducts);
-            tempProducts.ForEach(product=> CheckoutItems.Add(new CheckoutItem(product, 0)));
+            tempProducts.ForEach(product => CheckoutItems.Add(new CheckoutItem(product, 0)));
             _totalPrice = CheckoutItems.Sum(ci => ci.Price);
         }
 
@@ -57,7 +54,7 @@ namespace ShoppingCart
             Coupons.ForEach(coupon =>
             {
                 var itemForDiscount = tempProducts.FirstOrDefault(p => coupon.ResultingPrices.Name == p.Name);
-                if (itemForDiscount != (CartItem) default)
+                if (itemForDiscount != (CartItem)default)
                 {
                     CheckoutItems.Add(coupon.ResultingPrices);
                     tempProducts.Remove(itemForDiscount);

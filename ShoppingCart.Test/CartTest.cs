@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ShoppingCart.Test
 {
@@ -31,7 +30,7 @@ namespace ShoppingCart.Test
             cart.AddProduct(CartItem.Butter);
             cart.Checkout();
 
-            var expectedPrice = 2 * CartItem.Butter.Price 
+            var expectedPrice = 2 * CartItem.Butter.Price
                 + CartItem.Bread.Price
                 + CartItem.Bread.Price * 0.5;
 
