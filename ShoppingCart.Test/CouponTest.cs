@@ -18,7 +18,7 @@ namespace ShoppingCart.Test
         }
 
         [TestMethod]
-        public void BuyNProductsGetOneFree()
+        public void Buy3ProductsGetOneFree()
         {
             var fourthMilkFree = new Coupon(
                 new Prerequisite[] { new Prerequisite(3, CartItem.Milk) },

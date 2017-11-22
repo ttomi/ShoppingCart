@@ -7,14 +7,14 @@ namespace ShoppingCart
     public class Cart
     {
         public List<CartItem> Products;
-        public List<Coupon> Coupons;
+        public List<Coupon> Coupons => GetCoupons(Products);   // not sure if I should remove it or leave it as is to have instant access while debugging
+
         public List<CheckoutItem> CheckoutItems;
         private double _totalPrice;
 
         public Cart()
         {
             Products = new List<CartItem>();
-            Coupons = new List<Coupon>();
         }
 
         public double TotalPrice => _totalPrice;
@@ -30,31 +30,36 @@ namespace ShoppingCart
         /// </summary>
         public void Checkout()
         {
-            var tempProducts = new List<CartItem>(Products);    // not to influence the initial state of products
+            if (!Products.Any())
+                return;
+
+            var tempProducts = new List<CartItem>(Products);    // to not influence the initial state of products
             CheckoutItems = new List<CheckoutItem>();
-            GetCoupons();
-            ApplyCoupons(tempProducts);
+            var earnedCoupons = GetCoupons(Products);
+            ApplyCoupons(tempProducts, earnedCoupons);
             tempProducts.ForEach(product => CheckoutItems.Add(new CheckoutItem(product)));
             _totalPrice = CheckoutItems.Sum(ci => ci.Price);
         }
 
         /// <summary>
-        /// Passes through the list of active discounts
+        /// Passes through the list of active discounts and adds earned coupons
         /// </summary>
-        public void GetCoupons()
+        public List<Coupon> GetCoupons(List<CartItem> products)
         {
+            var coupons = new List<Coupon>();
             foreach (var discountCoupon in Coupon.ActiveDiscounts.Values)
             {
-                for (int i = 0; i < Products.GetCouponCount(discountCoupon.PrerequisiteProducts); i++)
+                for (int i = 0; i < products.GetCouponCount(discountCoupon.PrerequisiteProducts); i++)
                 {
-                    Coupons.Add(discountCoupon);
+                    coupons.Add(discountCoupon);
                 }
             }
+            return coupons;
         }
 
-        private void ApplyCoupons(List<CartItem> tempProducts)
+        private void ApplyCoupons(List<CartItem> tempProducts, List<Coupon> coupons)
         {
-            Coupons.ForEach(coupon =>
+            coupons.ForEach(coupon =>
             {
                 var itemForDiscount = tempProducts.FirstOrDefault(p => coupon.ResultingPrices.Name == p.Name);
                 if (itemForDiscount != (CartItem)default)

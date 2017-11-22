@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using ShoppingCart.Helpers;
 
 namespace ShoppingCart.Test
 {
@@ -99,7 +100,6 @@ namespace ShoppingCart.Test
             {
                 cart.AddProduct(CartItem.Milk);
             }
-            cart.GetCoupons();
             Assert.AreEqual(cart.Coupons.Count, 3);
         }
 
