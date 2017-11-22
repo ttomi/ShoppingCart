@@ -39,6 +39,25 @@ namespace ShoppingCart.Test
         }
 
         [TestMethod]
+        public void TwoBreadsAreHalfPriceBothIfFourButtersAreBought()
+        {
+            var cart = new Cart();
+            cart.AddProduct(CartItem.Bread);
+            cart.AddProduct(CartItem.Bread);
+            cart.AddProduct(CartItem.Butter);
+            cart.AddProduct(CartItem.Butter);
+            cart.AddProduct(CartItem.Butter);
+            cart.AddProduct(CartItem.Butter);
+            cart.Checkout();
+
+            var expectedPrice = 4 * CartItem.Butter.Price
+                                + 2* CartItem.Bread.Price * 0.5;
+
+            Assert.AreEqual(cart.TotalPrice, expectedPrice, precision);
+            Assert.AreEqual(cart.TotalPrice, 4.2, precision);
+        }
+
+        [TestMethod]
         public void FourthMilkShouldBeFree()
         {
             var cart = new Cart();
