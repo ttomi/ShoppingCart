@@ -22,11 +22,6 @@ namespace ShoppingCart
             }
         }
 
-        public int GetCouponStackCount(List<CartItem> cartItems)
-        {
-            return PrerequisiteProducts.Min(pp => pp.GetCouponCount(cartItems));
-        }
-
         #region CouponEntries
 
         private static Coupon ButterHalfPrice = new Coupon(

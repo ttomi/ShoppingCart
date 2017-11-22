@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ShoppingCart.Helpers;
 
 namespace ShoppingCart
 {
@@ -44,7 +45,7 @@ namespace ShoppingCart
         {
             foreach (var discountCoupon in Coupon.ActiveDiscounts.Values)
             {
-                for (int i = 0; i < discountCoupon.GetCouponStackCount(Products); i++)
+                for (int i = 0; i < Products.GetCouponCount(discountCoupon.PrerequisiteProducts); i++)
                 {
                     Coupons.Add(discountCoupon);
                 }
