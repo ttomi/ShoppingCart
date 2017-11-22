@@ -34,5 +34,13 @@ namespace ShoppingCart
         {
             return Name + " " + Price;
         }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as CartItem;
+            return item != null &&
+                   Name == item.Name &&
+                   Price == item.Price;
+        }
     }
 }

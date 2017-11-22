@@ -32,7 +32,7 @@ namespace ShoppingCart.Helpers
 
         private static IEnumerable<CartItem> GetComparableItems(this List<CartItem> cartItems, CartItem prerequisiteItem)
         {
-            return cartItems.Where(cartItem => cartItem == prerequisiteItem);
+            return cartItems.Where(cartItem => cartItem.Equals(prerequisiteItem));
         }
     }
 }
