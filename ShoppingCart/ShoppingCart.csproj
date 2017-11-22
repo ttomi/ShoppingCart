@@ -49,6 +49,7 @@
     <Compile Include="CartItem.cs" />
     <Compile Include="CheckoutItem.cs" />
     <Compile Include="Coupon.cs" />
+    <Compile Include="Prerequisite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
