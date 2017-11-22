@@ -25,6 +25,21 @@ namespace ShoppingCart
             _totalPrice += cartItem.Price;
         }
 
+        public void RemoveProduct(CartItem cartItem)
+        {
+            if (!Products.Any() && !Products.Contains(cartItem))
+                return;
+
+            Products.Remove(cartItem);
+            _totalPrice -= cartItem.Price;
+
+            // if we have already checked-out we should recheck the price and discounts
+            if (CheckoutItems.Any())
+            {
+                Checkout();
+            }
+        }
+
         /// <summary>
         /// Check discount qualifications and recalculate total price.
         /// </summary>
