@@ -37,13 +37,16 @@ namespace ShoppingCart
             _totalPrice = CheckoutItems.Sum(ci => ci.Price);
         }
 
+        /// <summary>
+        /// Passes through the list of active discounts
+        /// </summary>
         public void GetCoupons()
         {
-            foreach (var discountsValue in Coupon.ActiveDiscounts.Values)
+            foreach (var discountCoupon in Coupon.ActiveDiscounts.Values)
             {
-                for (int i = 0; i < discountsValue.PrerequisiteProducts.Min(pp => pp.GetCouponCount(Products)); i++)
+                for (int i = 0; i < discountCoupon.GetCouponStackCount(Products); i++)
                 {
-                    Coupons.Add(discountsValue);
+                    Coupons.Add(discountCoupon);
                 }
             }
         }
