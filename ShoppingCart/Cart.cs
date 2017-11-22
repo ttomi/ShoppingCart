@@ -41,7 +41,7 @@ namespace ShoppingCart
         {
             foreach (var discountsValue in Coupon.ActiveDiscounts.Values)
             {
-                for (int i = 0; i < discountsValue.PrerequisiteProducts.Min(pp => pp.GetCouponCount(this)); i++)
+                for (int i = 0; i < discountsValue.PrerequisiteProducts.Min(pp => pp.GetCouponCount(Products)); i++)
                 {
                     Coupons.Add(discountsValue);
                 }

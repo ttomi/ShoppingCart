@@ -14,15 +14,20 @@ namespace ShoppingCart
             Item = item;
         }
 
-        public int GetCouponCount(Cart cart)
+        /// <summary>
+        /// Returns how many times is the single prerequisite satisfied.
+        /// </summary>
+        /// <param name="cartItems"></param>
+        /// <returns></returns>
+        public int GetCouponCount(List<CartItem> cartItems)
         {
-            int comparableItemsInCartCount = GetComparableItems(cart).Count();
+            int comparableItemsInCartCount = GetComparableItems(cartItems).Count();
             return comparableItemsInCartCount / RequiredCount;
         }
 
-        private IEnumerable<CartItem> GetComparableItems(Cart cart)
+        private IEnumerable<CartItem> GetComparableItems(List<CartItem> cartItems)
         {
-            return cart.Products.Where(cartItem => cartItem == Item);
+            return cartItems.Where(cartItem => cartItem == Item);
         }
     }
 }
