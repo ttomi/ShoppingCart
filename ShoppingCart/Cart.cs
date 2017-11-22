@@ -33,7 +33,7 @@ namespace ShoppingCart
             CheckoutItems = new List<CheckoutItem>();
             GetCoupons();
             ApplyCoupons(tempProducts);
-            tempProducts.ForEach(product => CheckoutItems.Add(new CheckoutItem(product, 0)));
+            tempProducts.ForEach(product => CheckoutItems.Add(new CheckoutItem(product)));
             _totalPrice = CheckoutItems.Sum(ci => ci.Price);
         }
 
