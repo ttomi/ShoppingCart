@@ -18,6 +18,17 @@ namespace ShoppingCart.Test
         }
 
         [TestMethod]
+        public void BuyTwoBreadsGetOneDiscounted()
+        {
+            var butterHalfPrice = new Coupon(
+                new Prerequisite[] { new Prerequisite(2, CartItem.Bread) },
+                new CheckoutItem(CartItem.Bread, 0.5)
+            );
+
+            Assert.AreEqual(butterHalfPrice.PrerequisiteProducts.First().RequiredCount, 3);
+        }
+
+        [TestMethod]
         public void Buy3ProductsGetOneFree()
         {
             var fourthMilkFree = new Coupon(

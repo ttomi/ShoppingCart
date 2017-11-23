@@ -104,6 +104,18 @@ namespace ShoppingCart.Test
         }
 
         [TestMethod]
+        public void FourBreadsBoughtDiscountOneBread()
+        {
+            var cart = new Cart();
+
+            for (int i = 0; i < 4; i++)
+            {
+                cart.AddProduct(CartItem.Bread);
+            }
+            Assert.AreEqual(cart.Coupons.Count, 1);
+        }
+
+        [TestMethod]
         public void TwoButterOneBreadEightMilk()
         {
             var cart = new Cart();
